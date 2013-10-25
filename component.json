@@ -1,0 +1,14 @@
+{
+  "name": "ember-typeahead",
+  "version": "0.0.1",
+  "license": "MIT",
+  "dependencies": {
+    "kelonye/ember": "*"
+  },
+  "main": "lib/index.js",
+  "scripts": [
+    "lib/index.js",
+    "lib/typeahead.js",
+    "lib/hogan.js"
+  ]
+}

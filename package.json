@@ -1,0 +1,9 @@
+{
+  "name": "ember-typeahead",
+  "version": "0.0.1",
+  "license": "MIT",
+  "devDependencies": {
+    "component-hooks": "*",
+    "superagent": "*"
+  }
+}
