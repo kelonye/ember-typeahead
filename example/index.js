@@ -1,5 +1,5 @@
-var express = require('../node_modules/component-hooks/node_modules/express/');
-var request = require('../node_modules/superagent');
+var express = require('express');
+var request = require('superagent');
 
 var app = express();
 
@@ -7,9 +7,10 @@ app.use(express.static(__dirname+'/../public'));
 
 app.get('/search', function(req, res){
   request
-    .get('http://component.io/components/all')
-    .end(function(err, data){
-      var components = data.body
+    .get('http://component-crawler.herokuapp.com/.json')
+    .end(function(err, response){
+      var data = response.body.components || [];
+      var components = data
         .filter(function(component){
           return !!component;
         })

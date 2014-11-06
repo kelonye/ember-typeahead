@@ -9,7 +9,7 @@ components:
 	@$(component) install --dev
 
 lib/typeahead.js:
-	@axel -o $@ http://twitter.github.com/typeahead.js/releases/latest/typeahead.min.js
+	@axel -o $@ https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js
 	@touch $@
 
 public: lib/index.js lib/typeahead.js
