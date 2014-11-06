@@ -16,26 +16,44 @@ var typeahead = require('ember-typeahead');
 var App = Em.Application.create();
 
 App.IndexView = Em.View.extend({
-  didInsertElement: function(){
 
-    this._super();
-    
-    var template = [
-      '<p class="repo-language">{{repo}}</p>',
-      '<p class="repo-name">{{name}}</p>',
-      '<p class="repo-description">{{description}}</p>'
-    ].join('');
+  autocomplete: function(){
+  
+    var bh = new Bloodhound({
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      prefetch: '/search'
+    });
 
-    var opts = {
-      name: 'components',
-      prefetch: '/search',
-      template: template,
-      limit: 10
+    bh.initialize();
+
+    var plugin = {
+      hint: true,
+      highlight: true,
+      minLength: 1
     };
 
-    typeahead('.typeahead', opts); // apply on .typeahead input
+    var datasets = {
+      name: 'components',
+      displayKey: 'value',
+      source: bh.ttAdapter(),
+      templates: {
+        empty: [
+          '<div class="empty-message">',
+          'no match found',
+          '</div>'
+        ].join('\n'),
+        suggestion: Handlebars.compile([
+          '<p class="repo-language">{{repo}}</p>',
+          '<p class="repo-name">{{name}}</p>',
+          '<p class="repo-description">{{description}}</p>'
+        ].join(''))
+      }
+    };
 
-  },
+    typeahead('.typeahead', plugin, datasets);
+
+  }.on('didInsertElement'),
   
 });
 
