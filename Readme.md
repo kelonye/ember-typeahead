@@ -51,7 +51,7 @@ App.IndexView = Em.View.extend({
       }
     };
 
-    typeahead('.typeahead', plugin, datasets);
+    typeahead($('.typeahead'), plugin, datasets);
 
   }.on('didInsertElement'),
   
